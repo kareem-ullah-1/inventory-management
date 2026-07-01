@@ -15,8 +15,12 @@ import reportRoutes from "./routes/reportRoutes.js";
 import auditLogRoutes from "./routes/auditlogRoutes.js";
 import salesRoutes from "./routes/salesRoutes.js";
 import purchaseRoutes from "./routes/purchaseRoutes.js";
+
 import aiChatRoutes from "./routes/aiChatRoutes.js";
+
+
 dotenv.config();
+
 
 const app = express();
 
@@ -55,7 +59,7 @@ app.use("/api/sales", salesRoutes);
 app.use("/api/purchases", purchaseRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/auditlogs", auditLogRoutes);
-app.use("/api/ai-forecast", aiForecastRoutes);
+
 app.use("/api/ai-chat", aiChatRoutes);
 
 app.get("/", (req, res) => {
