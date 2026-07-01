@@ -25,6 +25,25 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+let isConnected = false;
+const connectDB = async () => {
+  if (isConnected) return;
+  await mongoose.connect(process.env.MONGODB);
+  isConnected = true;
+  console.log("MongoDB Connected");
+};
+
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("MongoDB connection failed:", error.message);
+    res.status(500).json({ success: false, message: "Database connection failed" });
+  }
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
@@ -41,7 +60,6 @@ app.use("/api/auditlogs", auditLogRoutes);
 app.use("/api/ai-forecast", aiForecastRoutes);
 app.use("/api/ai-chat", aiChatRoutes);
 
-
 app.get("/", (req, res) => {
   res.json({
     success: true,
@@ -51,16 +69,18 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-mongoose
-  .connect(process.env.MONGODB)
-  .then(() => {
-    console.log("MongoDB Connected");
 
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+if (process.env.VERCEL !== "1") {
+  connectDB()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+      });
+    })
+    .catch((error) => {
+      console.error("MongoDB connection failed:", error.message);
+      process.exit(1);
     });
-  })
-  .catch((error) => {
-    console.error("MongoDB connection failed:", error.message);
-    process.exit(1);
-  });
+}
+
+export default app;
