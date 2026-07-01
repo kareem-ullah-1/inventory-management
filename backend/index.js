@@ -14,7 +14,7 @@ import userRoutes from "./routes/userRoutes.js";
 import salesRoutes from "./routes/salesRoutes.js";
 import purchaseRoutes from "./routes/purchaseRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
-import auditLogRoutes from "./routes/auditlog.js";
+import auditLogRoutes from "./routes/auditlogRoutes.js";
 import aiForecastRoutes from "./routes/aiForecastRoutes.js";
 import aiChatRoutes from "./routes/aiChatRoutes.js";
 
