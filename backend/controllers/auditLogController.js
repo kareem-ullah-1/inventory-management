@@ -1,5 +1,4 @@
-import AuditLog from "../models/AuditLog.js";
-
+import AuditLog from "../models/Auditlog.js";
 // Helper to create audit log entries — call this from other controllers
 export const createAuditLog = async ({ action, details, userId, req, resource, resourceId, status = "success" }) => {
   try {
