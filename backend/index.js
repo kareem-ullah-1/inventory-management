@@ -13,7 +13,6 @@ import supplierRoutes from "./routes/supplierRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
 import auditLogRoutes from "./routes/auditlogRoutes.js";
-import aiForecastRoutes from "./routes/aiForecastRoutes.js";
 import salesRoutes from "./routes/salesroutes.js";
 import purchaseRoutes from "./routes/purchaseroutes.js";
 import aiChatRoutes from "./routes/aichatRoutes.js";
