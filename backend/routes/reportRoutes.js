@@ -5,7 +5,7 @@ import {
   getPurchaseReport,
   getProfitLossReport,
   getCustomerReport,
-} from "../controllers/reportController.js";
+} from "../controllers/reportcontroller.js";
 
 import authMiddleware from "../middleware/authMiddleware.js";
 import { authorizeRoles } from "../middleware/roleMiddleware.js";
