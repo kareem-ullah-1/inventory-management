@@ -16,7 +16,7 @@ import auditLogRoutes from "./routes/auditlogRoutes.js";
 import salesRoutes from "./routes/salesroutes.js";
 import purchaseRoutes from "./routes/purchaseroutes.js";
 
-import aiChatRoutes from "./routes/aiChatRoutes.js";
+import aiChatRoutes from "./routes/aichatRoutes.js";
 
 
 dotenv.config();
