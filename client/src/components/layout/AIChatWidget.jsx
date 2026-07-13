@@ -71,7 +71,7 @@ export default function AIChatWidget() {
       {!open && (
         <button
           onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-slate-900 hover:bg-slate-800 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-105"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-slate-900 hover:bg-slate-800 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-105"
           title="AI Assistant"
         >
           <MessageCircle className="w-6 h-6" />
@@ -81,7 +81,7 @@ export default function AIChatWidget() {
 
       {/* Chat Window */}
       {open && (
-        <div className="fixed bottom-6 right-6 z-50 w-96 h-[560px] bg-white border border-slate-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+        <div className="fixed inset-x-4 bottom-4 top-16 sm:inset-x-auto sm:top-auto sm:bottom-6 sm:right-6 z-50 sm:w-96 sm:h-[560px] bg-white border border-slate-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
           {/* Header */}
           <div className="bg-slate-900 px-4 py-3 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-2.5">

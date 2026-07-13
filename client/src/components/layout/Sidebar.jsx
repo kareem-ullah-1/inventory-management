@@ -18,10 +18,11 @@ import {
   Search,
   Scan,
   ShieldCheck,
+  X,
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
-export default function Sidebar() {
+export default function Sidebar({ open = false, onClose = () => {} }) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
 
@@ -75,16 +76,36 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-64 shrink-0 bg-slate-900 text-slate-300 flex flex-col h-screen sticky top-0 overflow-y-auto">
+    <>
+      {/* Mobile overlay */}
+      {open && (
+        <div
+          onClick={onClose}
+          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 lg:hidden"
+        />
+      )}
+
+      <aside
+        className={`w-64 shrink-0 bg-slate-900 text-slate-300 flex flex-col h-screen overflow-y-auto
+          fixed top-0 left-0 z-50 transition-transform duration-200 ease-in-out
+          lg:sticky lg:translate-x-0
+          ${open ? "translate-x-0" : "-translate-x-full"}`}
+      >
       {/* Brand logo */}
       <div className="h-16 flex items-center gap-3 px-6 border-b border-slate-800 shrink-0">
         <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
           <Boxes className="w-5 h-5 text-white" />
         </div>
-        <div>
+        <div className="flex-1 min-w-0">
           <span className="font-bold text-white tracking-wide text-lg">StockFlow</span>
           <span className="text-[10px] block text-emerald-400 font-medium leading-none">v1.1 Enterprise</span>
         </div>
+        <button
+          onClick={onClose}
+          className="lg:hidden p-1.5 rounded-md text-slate-400 hover:text-white hover:bg-slate-800"
+        >
+          <X className="w-5 h-5" />
+        </button>
       </div>
 
       {/* Navigation menu */}
@@ -107,6 +128,7 @@ export default function Sidebar() {
                     <Link
                       key={href}
                       href={href}
+                      onClick={onClose}
                       className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                         active
                           ? "bg-emerald-600 text-white shadow-sm shadow-emerald-900/30"
@@ -143,6 +165,7 @@ export default function Sidebar() {
           Sign Out
         </button>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 }
