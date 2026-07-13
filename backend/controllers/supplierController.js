@@ -1,6 +1,6 @@
 import Supplier from "../models/Supplier.js";
 
- const createSupplier = async (req, res) => {
+const createSupplier = async (req, res) => {
   try {
     const supplier = await Supplier.create({
       ...req.body,
@@ -20,11 +20,18 @@ import Supplier from "../models/Supplier.js";
   }
 };
 
- const getSuppliers = async (req, res) => {
+const getSuppliers = async (req, res) => {
   try {
     const { search, isActive, page = 1, limit = 20 } = req.query;
 
     const query = {};
+
+    
+    if (isActive !== undefined) {
+      query.isActive = isActive === "true";
+    } else {
+      query.isActive = true;
+    }
 
     if (search) {
       query.$or = [
@@ -32,10 +39,6 @@ import Supplier from "../models/Supplier.js";
         { email: { $regex: search, $options: "i" } },
         { phone: { $regex: search, $options: "i" } },
       ];
-    }
-
-    if (isActive !== undefined) {
-      query.isActive = isActive === "true";
     }
 
     const skip = (Number(page) - 1) * Number(limit);
@@ -66,7 +69,7 @@ import Supplier from "../models/Supplier.js";
   }
 };
 
- const getSupplierById = async (req, res) => {
+const getSupplierById = async (req, res) => {
   try {
     const supplier = await Supplier.findById(req.params.id).populate(
       "createdBy",
@@ -93,7 +96,7 @@ import Supplier from "../models/Supplier.js";
   }
 };
 
- const updateSupplier = async (req, res) => {
+const updateSupplier = async (req, res) => {
   try {
     const supplier = await Supplier.findByIdAndUpdate(
       req.params.id,
@@ -121,7 +124,7 @@ import Supplier from "../models/Supplier.js";
   }
 };
 
- const deleteSupplier = async (req, res) => {
+const deleteSupplier = async (req, res) => {
   try {
     const supplier = await Supplier.findByIdAndUpdate(
       req.params.id,
@@ -154,5 +157,5 @@ export {
   getSuppliers,
   getSupplierById,
   updateSupplier,
-  deleteSupplier
+  deleteSupplier,
 };

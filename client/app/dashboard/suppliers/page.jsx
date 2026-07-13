@@ -30,12 +30,18 @@ export default function SuppliersPage() {
       setEditingId(null);
       setFormData(emptyForm);
     },
+    onError: (error) => {
+      alert(error.response?.data?.message || "Failed to save supplier");
+    },
   });
 
   const deleteMutation = useMutation({
     mutationFn: (id) => supplierService.deleteSupplier(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["suppliers"] });
+    },
+    onError: (error) => {
+      alert(error.response?.data?.message || "Failed to delete supplier");
     },
   });
 
